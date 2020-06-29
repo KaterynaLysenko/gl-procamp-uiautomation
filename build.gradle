@@ -10,8 +10,13 @@ repositories {
 
 dependencies {
 
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.4.2")
+
+    testImplementation 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
-    testImplementation ("io.github.bonigarcia:webdrivermanager:4.0.0")
+    testImplementation 'io.github.bonigarcia:webdrivermanager:4.0.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
@@ -19,4 +24,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    maxParallelForks = 4
 }

@@ -1,8 +1,8 @@
-package com.klysenko.test;
+package com.klysenko.test.hometask1and2;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -13,12 +13,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class FirstTest {
+public class BrowserstackRun {
 
-    WebDriver driver;
+    static WebDriver driver;
 
-    @BeforeEach
-    void setUp() throws MalformedURLException {
+    @BeforeAll
+    public static void setUp() throws MalformedURLException {
+
         String USERNAME = "bsuser70982";
         String AUTOMATE_KEY = "UcVgFzxkVw1m3TZZpGyx";
         String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
@@ -33,24 +34,15 @@ public class FirstTest {
         driver = new RemoteWebDriver(new URL(URL), caps);
     }
 
-    @AfterEach
-    void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.quit();
     }
 
     @Test
-    void simpleTest() {
+    void simpleTestOnBrowserstack() {
         driver.get("http://google.com");
         driver.findElement(By.name("q")).sendKeys("Selenium" + Keys.ENTER);
         Assertions.assertEquals("Selenium", driver.findElement(By.tagName("h3")).getText());
     }
-
-    @Test
-    void simpleTest2() {
-        driver.get("http://google.com");
-        driver.findElement(By.name("q")).sendKeys("GlobalLogic\n");
-        Assertions.assertTrue(driver.findElement(By.tagName("h3")).getText().contains("GlobalLogic"));
-    }
-
-
 }
