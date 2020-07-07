@@ -24,32 +24,20 @@ public class ShopBasePage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public List<WebElement> getProductsList() {
-        return productsList;
-    }
-
-    public WebElement getCountOfItemsInTheCart() {
-        return countOfItemsInTheCart;
-    }
-
-    public WebElement getCartIcon() {
-        return cartIcon;
-    }
-
     public void openProductByIndex(int index) {
-        getProductsList().get(index).click();
+        productsList.get(index).click();
 
     }
 
     public void openCart() {
-        getCartIcon().click();
+        cartIcon.click();
         waitForPageLoaded();
     }
 
     private int getCountOfItemsOnCartIcon() {
-        if (getCountOfItemsInTheCart().getText().isEmpty()) {
+        if (countOfItemsInTheCart.getText().isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(getCountOfItemsInTheCart().getText());
+        return Integer.parseInt(countOfItemsInTheCart.getText());
     }
 }

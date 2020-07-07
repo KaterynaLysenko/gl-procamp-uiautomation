@@ -1,6 +1,7 @@
 package com.klysenko.test.hometask3and4.pages.admin;
 
 import com.klysenko.test.hometask3and4.pages.Page;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AddNewProductPage extends Page {
 
+    @Getter
     private AddNewProductPageGeneralTab generalTab;
+
+    @Getter
     private AddNewProductInformationTab informationTab;
+
+    @Getter
     private AddNewProductPricesTab pricesTab;
 
     @FindBy(xpath = "//a[contains(text(),'General')]")

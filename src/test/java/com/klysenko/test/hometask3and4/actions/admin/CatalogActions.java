@@ -9,29 +9,23 @@ public class CatalogActions extends BaseActions {
 
     private CatalogPage catalogPage;
     private AddNewProductPage addNewProductPage;
-    private AddNewProductPageGeneralTab generalTab;
-    private AddNewProductInformationTab informationTab;
-    private AddNewProductPricesTab pricesTab;
     private BaseAdminActions baseAdminActions;
 
     public CatalogActions(WebDriver driver) {
         super(driver);
         catalogPage = new CatalogPage(driver);
         addNewProductPage = new AddNewProductPage(driver);
-        generalTab = new AddNewProductPageGeneralTab(driver);
-        informationTab = new AddNewProductInformationTab(driver);
-        pricesTab = new AddNewProductPricesTab(driver);
         baseAdminActions = new BaseAdminActions(driver);
     }
 
     public void createNewProduct(Product product) {
         baseAdminActions.openCatalogMenu();
         catalogPage.goToAddingNewProduct();
-        generalTab.populateAllFields(product);
+        addNewProductPage.getGeneralTab().populateAllFields(product);
         addNewProductPage.goToInformationTab();
-        informationTab.populateAllFields(product);
+        addNewProductPage.getInformationTab().populateAllFields(product);
         addNewProductPage.goToPricesTab();
-        pricesTab.populateAllFields(product);
+        addNewProductPage.getPricesTab().populateAllFields(product);
         addNewProductPage.saveChanges();
     }
 

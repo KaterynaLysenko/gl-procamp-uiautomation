@@ -16,12 +16,8 @@ public class ProductDescriptionPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getAddToCartButton() {
-        return addToCartButton;
-    }
-
     public void addProductToCart() {
-        getAddToCartButton().click();
+        addToCartButton.click();
         waitForPageLoaded();
     }
 }
