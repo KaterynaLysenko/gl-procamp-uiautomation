@@ -1,5 +1,8 @@
-package com.klysenko.test.hometask3.pages;
+package com.klysenko.test.hometask3and4.pages.admin;
 
+import com.klysenko.test.hometask3and4.pages.Page;
+import com.klysenko.test.hometask3and4.properties.Properties;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,18 +24,11 @@ public class AdminLoginPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getLoginButton() {
-        return loginButton;
-
+    public void login() {
+        driver.get(Properties.adminUrl);
+        usernameInput.sendKeys(Properties.user);
+        passwordInput.sendKeys(Properties.password);
+        loginButton.click();
+        wait.until(d -> d.findElement(By.xpath("//ul[@id='box-apps-menu']/li[1]")));
     }
-
-    public WebElement getUsernameInput() {
-        return usernameInput;
-    }
-
-    public WebElement getPasswordInput() {
-        return passwordInput;
-    }
-
-
 }

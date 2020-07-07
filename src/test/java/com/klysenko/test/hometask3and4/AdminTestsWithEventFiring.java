@@ -1,14 +1,12 @@
-package com.klysenko.test.hometask3;
+package com.klysenko.test.hometask3and4;
 
-import com.klysenko.test.hometask3.actions.BaseAdminActions;
-import com.klysenko.test.hometask3.actions.ShopActions;
-import com.klysenko.test.hometask3.listeners.DriverEventListener;
+import com.klysenko.test.hometask3and4.actions.admin.BaseAdminActions;
+import com.klysenko.test.hometask3and4.listeners.DriverEventListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
@@ -19,17 +17,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.logging.Level;
 
-public class BaseTest {
+public class AdminTestsWithEventFiring {
 
-    public static EventFiringWebDriver driver;
-    static WebDriverWait wait;
+    EventFiringWebDriver driver;
+    WebDriverWait wait;
 
-    static BaseAdminActions baseAdminActions;
-    static ShopActions shopActions;
+    BaseAdminActions baseAdminActions;
 
-
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
 
         LoggingPreferences logs = new LoggingPreferences();
         logs.enable(LogType.BROWSER, Level.INFO);
@@ -50,20 +46,20 @@ public class BaseTest {
 
         wait = new WebDriverWait(driver, 10);
 
+        baseAdminActions = new BaseAdminActions(driver);
     }
 
-    @AfterAll
-    static void tearDown() {
+
+    @Test
+    public void allMenuItemsShouldBeClickableOnAdmin() {
+        baseAdminActions.loginToAdmin();
+        Assertions.assertTrue(baseAdminActions.isHeaderDisplayedOnAllPages());
+    }
+
+    @AfterEach
+    void tearDown() {
         driver.quit();
     }
 
-    private boolean isElementPresent(WebDriver driver, By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex) {
-            return false;
-        }
-    }
 
 }

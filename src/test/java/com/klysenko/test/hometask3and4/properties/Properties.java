@@ -1,4 +1,4 @@
-package com.klysenko.test.hometask3.properties;
+package com.klysenko.test.hometask3and4.properties;
 
 public class Properties {
 

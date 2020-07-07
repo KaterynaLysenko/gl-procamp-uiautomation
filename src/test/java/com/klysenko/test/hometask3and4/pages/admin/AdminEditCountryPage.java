@@ -1,32 +1,30 @@
-package com.klysenko.test.hometask3.actions;
+package com.klysenko.test.hometask3and4.pages.admin;
 
-import com.klysenko.test.hometask3.pages.AdminCountriesPage;
-import com.klysenko.test.hometask3.pages.AdminEditCountryPage;
+import com.klysenko.test.hometask3and4.pages.Page;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
 import java.util.Set;
 
-public class AdminCountriesActions extends BaseActions {
+public class AdminEditCountryPage extends Page {
 
-    AdminCountriesPage countriesPage = new AdminCountriesPage(driver);
-    AdminEditCountryPage editCountryPage = new AdminEditCountryPage(driver);
+    @FindBy(xpath = ".//i[@class='fa fa-external-link']")
+    private List<WebElement> externalLinkIcons;
 
-
-    public AdminCountriesActions(WebDriver driver) {
+    public AdminEditCountryPage(WebDriver driver) {
         super(driver);
-    }
-
-    public void getCountryByIndex(int indexOfCountryInTheList) {
-        countriesPage.getCountriesNames().get(indexOfCountryInTheList).click();
-
+        PageFactory.initElements(driver, this);
     }
 
     public void openExternalLinkByIndex(int index) {
-        editCountryPage.getExternalLinkIcons().get(index).click();
+        externalLinkIcons.get(index).click();
     }
 
-    public boolean IsAllLinksAreOpenedInNewWindows() {
-        int externalLinksIconsNumber = editCountryPage.getExternalLinkIcons().size();
+    public boolean isExternalLinksAreOpenedInNewWindows() {
+        int externalLinksIconsNumber = externalLinkIcons.size();
         String parentWindowHandle = driver.getWindowHandle();
         String newWindowHandle = null;
         for (int i = 0; i < externalLinksIconsNumber; i++) {
@@ -47,5 +45,4 @@ public class AdminCountriesActions extends BaseActions {
         }
         return true;
     }
-
 }

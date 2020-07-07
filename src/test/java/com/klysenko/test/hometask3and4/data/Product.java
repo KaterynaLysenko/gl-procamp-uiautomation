@@ -1,4 +1,4 @@
-package com.klysenko.test.hometask3.data;
+package com.klysenko.test.hometask3and4.data;
 
 import lombok.Builder;
 import lombok.Data;

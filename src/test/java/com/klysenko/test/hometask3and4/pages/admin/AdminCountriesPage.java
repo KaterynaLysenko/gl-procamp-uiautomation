@@ -1,5 +1,6 @@
-package com.klysenko.test.hometask3.pages;
+package com.klysenko.test.hometask3and4.pages.admin;
 
+import com.klysenko.test.hometask3and4.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,9 +19,8 @@ public class AdminCountriesPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public List<WebElement> getCountriesNames() {
-        return countriesNames;
+
+    public void getCountryByIndex(int indexOfCountryInTheList) {
+        countriesNames.get(indexOfCountryInTheList).click();
     }
-
-
 }

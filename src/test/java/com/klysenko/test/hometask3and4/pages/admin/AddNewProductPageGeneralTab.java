@@ -1,7 +1,7 @@
-package com.klysenko.test.hometask3.pages;
+package com.klysenko.test.hometask3and4.pages.admin;
 
-import com.klysenko.test.hometask3.data.Product;
-import org.openqa.selenium.By;
+import com.klysenko.test.hometask3and4.data.Product;
+import com.klysenko.test.hometask3and4.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +28,7 @@ public class AddNewProductPageGeneralTab extends Page {
     @FindBy(xpath = "//input[@name='date_valid_to']")
     private WebElement dateValidToInput;
 
-    @FindBy(xpath = "//input[@name='name[en]'")
+    @FindBy(xpath = "//input[@name='name[en]']")
     private WebElement nameInput;
 
     @FindBy(xpath = "//input[@name='code']")
@@ -55,7 +55,7 @@ public class AddNewProductPageGeneralTab extends Page {
     @FindBy(xpath = "//input[@name='keywords']")
     private WebElement keywordsInput;
 
-    @FindBy(xpath = "//input[@name='new_images[]")
+    @FindBy(xpath = "//input[@name='new_images[]']")
     private WebElement imagesInput;
 
     public AddNewProductPageGeneralTab(WebDriver driver) {
@@ -64,63 +64,34 @@ public class AddNewProductPageGeneralTab extends Page {
     }
 
 
-    public WebElement getEnabledButton() {
-        return enabledButton;
+    public void populateAllFields(Product product) {
+        enabledButton.click();
+        selectCategory(product.getCategory());
+        dateValidFromInput.sendKeys(product.getDateValidFrom());
+        dateValidToInput.sendKeys(product.getDateValidTo());
+        nameInput.sendKeys(product.getName());
+        codeInput.sendKeys(product.getCode());
+        skuInput.sendKeys(product.getSku());
+        mpnInput.sendKeys(product.getMpn());
+        gtinInput.sendKeys(product.getGtin());
+        taricInput.sendKeys(product.getTaric());
+        selectManufacturer(product.getManufacturer());
+        keywordsInput.sendKeys(product.getKeywords());
+        uploadImage(product.getImage());
     }
 
-    public List<WebElement> getCategoriesCheckButtons() {
-        return categoriesCheckButtons;
+    private void uploadImage(String imageName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(imageName).getFile());
+        imagesInput.sendKeys(file.getAbsolutePath());
     }
 
-    public WebElement getDefaultCategorySelect() {
-        return defaultCategorySelect;
+    public void selectCategory(String category) {
+        new Select(defaultCategorySelect).selectByVisibleText(category);
     }
 
-    public WebElement getDateValidFromInput() {
-        return dateValidFromInput;
+    public void selectManufacturer(String manufacturer) {
+        new Select(manufacturerSelect).selectByVisibleText(manufacturer);
     }
 
-    public WebElement getDateValidToInput() {
-        return dateValidToInput;
-    }
-
-    public WebElement getNameInput() {
-        return nameInput;
-    }
-
-    public WebElement getCodeInput() {
-        return codeInput;
-    }
-
-    public WebElement getSkuInput() {
-        return skuInput;
-    }
-
-    public WebElement getMpnInput() {
-        return mpnInput;
-    }
-
-    public WebElement getGtinInput() {
-        return gtinInput;
-    }
-
-    public WebElement getTaricInput() {
-        return taricInput;
-    }
-
-    public WebElement getManufacturerSelect() {
-        return manufacturerSelect;
-    }
-
-    public WebElement getSupplierSelect() {
-        return supplierSelect;
-    }
-
-    public WebElement getKeywordsInput() {
-        return keywordsInput;
-    }
-
-    public WebElement getImagesInput() {
-        return imagesInput;
-    }
 }
