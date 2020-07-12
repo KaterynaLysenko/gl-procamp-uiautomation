@@ -1,6 +1,7 @@
 package com.klysenko.test.hometask3and4.pages.admin;
 
 import com.klysenko.test.hometask3and4.pages.Page;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,22 +38,24 @@ public class AdminBasePage extends Page {
 
     public void openCountriesTab() {
         countriesTab.click();
-        waitForPageLoaded();
+        wait.until(d -> d.findElement(By.xpath(".//table[@class='table table-striped table-hover data-table']//tr//a")));
     }
 
     public void logOut() {
         signOutButton.click();
-        waitForPageLoaded();
+        wait.until(d -> d.findElement(By.xpath(".//button[@name='login']")));
     }
 
     public boolean isHeaderDisplayedOnAllPages() {
         int countOfMenuItems = menuItems.size();
+        if (countOfMenuItems == 0){
+            return false;
+        }
         for (int i = 0; i < countOfMenuItems; i++) {
             menuItems.get(i).click();
             if (!header.isDisplayed()) {
                 return false;
             }
-
             int countOfSubItems = subMenuItems.size();
             for (int j = 0; j < countOfSubItems; j++) {
                 subMenuItems.get(j).click();

@@ -6,6 +6,9 @@ import com.klysenko.test.hometask3and4.pages.shop.ProductDescriptionPage;
 import com.klysenko.test.hometask3and4.pages.shop.ShopBasePage;
 import com.klysenko.test.hometask3and4.properties.Properties;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.function.Function;
 
 public class BaseShopActions extends BaseActions {
     private ShopBasePage shopBasePage;
@@ -31,6 +34,7 @@ public class BaseShopActions extends BaseActions {
 
     public void openCart() {
         shopBasePage.openCart();
+
     }
 
     public void removeAllProductsFromCart() {
@@ -39,6 +43,10 @@ public class BaseShopActions extends BaseActions {
 
     public boolean isCartEmpty() {
         return cartPage.isCartEmpty();
+    }
+
+    public int getCountOfItemsInCart(){
+        return shopBasePage.getCountOfItemsOnCartIcon();
     }
 
 }

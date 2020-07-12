@@ -25,6 +25,9 @@ public class AdminEditCountryPage extends Page {
 
     public boolean isExternalLinksAreOpenedInNewWindows() {
         int externalLinksIconsNumber = externalLinkIcons.size();
+        if (externalLinksIconsNumber == 0){
+            return false;
+        }
         String parentWindowHandle = driver.getWindowHandle();
         String newWindowHandle = null;
         for (int i = 0; i < externalLinksIconsNumber; i++) {

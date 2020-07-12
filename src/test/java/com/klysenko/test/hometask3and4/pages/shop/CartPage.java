@@ -26,17 +26,20 @@ public class CartPage extends Page {
             return;
         }
         while (getCountOfItemsInCart() > 1) {
+            //driver.findElement(By.xpath("//button[@title='Remove']")).click();
             removeItemsButtons.get(0).click();
-            wait.until(d -> d.findElement(By.xpath("//section[@id='box-checkout-customer']")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@title='Remove']")));
         }
         if (getCountOfItemsInCart() == 1) {
             removeItemsButtons.get(0).click();
+            //driver.findElement(By.xpath("//button[@title='Remove']")).click();
             wait.until(d -> d.findElement(By.xpath("//p[contains(text(),'There are no items in your cart.')]")));
         }
     }
 
     private int getCountOfItemsInCart() {
-        return removeItemsButtons.size();
+        //return removeItemsButtons.size();
+        return driver.findElements(By.xpath("//button[@title='Remove']")).size();
     }
 
     public boolean isCartEmpty() {
