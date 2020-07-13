@@ -17,20 +17,16 @@ public class BaseActions {
         wait = new WebDriverWait(driver, 10);
     }
 
-    public void confirmBrowserAlert(){
+    public void confirmBrowserAlert() {
         driver.switchTo().alert().accept();
     }
 
-    public void waitForPageLoaded()
-    {
-        ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+    public void waitForPageLoaded() {
+        ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 
-        try
-        {
+        try {
             wait.until(expectation);
-        }
-        catch(Throwable error)
-        {
+        } catch (Throwable error) {
             error.getMessage();
         }
     }

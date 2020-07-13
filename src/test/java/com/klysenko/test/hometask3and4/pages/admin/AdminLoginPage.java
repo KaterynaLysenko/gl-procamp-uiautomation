@@ -26,6 +26,7 @@ public class AdminLoginPage extends Page {
 
     public void login() {
         driver.get(Properties.adminUrl);
+        wait.until(d -> d.findElement(By.xpath("//input[@name='username']")));
         usernameInput.sendKeys(Properties.user);
         passwordInput.sendKeys(Properties.password);
         loginButton.click();

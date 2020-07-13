@@ -19,7 +19,6 @@ public class AdminCountriesPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-
     public void getCountryByIndex(int indexOfCountryInTheList) {
         countriesNames.get(indexOfCountryInTheList).click();
     }

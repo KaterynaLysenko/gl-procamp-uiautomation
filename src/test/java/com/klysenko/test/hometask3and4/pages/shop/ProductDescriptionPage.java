@@ -23,8 +23,8 @@ public class ProductDescriptionPage extends Page {
 
     public void addProductToCart() {
         int countOfProductsBeforeAdding = shopBasePage.getCountOfItemsOnCartIcon();
-        addToCartButton.click();
-        wait.until(ExpectedConditions.textToBe(By.xpath("//div[@class='badge quantity']"),
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@class='badge quantity']"),
                 String.valueOf(1+countOfProductsBeforeAdding)));
     }
 }

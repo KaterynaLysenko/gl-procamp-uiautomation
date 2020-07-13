@@ -1,9 +1,6 @@
 package com.klysenko.test.hometask3and4.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,27 +14,63 @@ public class Page {
         wait = new WebDriverWait(driver, 10);
     }
 
-    public void confirmBrowserAlert(){
+    public void confirmBrowserAlert() {
         driver.switchTo().alert().accept();
     }
 
-    public void waitForPageLoaded()
-    {
-        ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+    public void waitForPageLoaded() {
+        ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 
-        try
-        {
+        try {
             wait.until(expectation);
-        }
-        catch(Throwable error)
-        {
+        } catch (Throwable error) {
             error.getMessage();
         }
     }
 
-    private boolean isElementPresent(WebDriver driver, By locator) {
+
+    public void retryingClick(By by) {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                driver.findElement(by).click();
+                break;
+            } catch (StaleElementReferenceException e) {
+            }
+            attempts++;
+        }
+    }
+
+    public void retryingClick(WebElement webElement) {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                webElement.click();
+                break;
+            } catch (StaleElementReferenceException e) {
+            }
+            attempts++;
+        }
+    }
+
+    public void clickViaJsExec(WebElement webElement) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", webElement);
+    }
+
+    public boolean isElementPresent(WebElement webElement) {
         try {
-            driver.findElement(locator);
+            webElement.isDisplayed();
+            //driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    public boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
             return true;
         } catch (NoSuchElementException ex) {
             return false;

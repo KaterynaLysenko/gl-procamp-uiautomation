@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.Set;
@@ -20,12 +21,13 @@ public class AdminEditCountryPage extends Page {
     }
 
     public void openExternalLinkByIndex(int index) {
-        externalLinkIcons.get(index).click();
+        wait.until(ExpectedConditions.elementToBeClickable(externalLinkIcons.get(index))).click();
+        waitForPageLoaded();
     }
 
     public boolean isExternalLinksAreOpenedInNewWindows() {
         int externalLinksIconsNumber = externalLinkIcons.size();
-        if (externalLinksIconsNumber == 0){
+        if (externalLinksIconsNumber == 0) {
             return false;
         }
         String parentWindowHandle = driver.getWindowHandle();
@@ -43,6 +45,7 @@ public class AdminEditCountryPage extends Page {
                 }
             }
             driver.switchTo().window(newWindowHandle);
+            waitForPageLoaded();
             driver.close();
             driver.switchTo().window(parentWindowHandle);
         }

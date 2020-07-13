@@ -53,7 +53,7 @@ public class AdminTestsWithEventFiring {
     @Test
     public void allMenuItemsShouldBeClickableOnAdmin() {
         baseAdminActions.loginToAdmin();
-        Assertions.assertTrue(baseAdminActions.isHeaderDisplayedOnAllPages());
+        Assertions.assertTrue(baseAdminActions.isHeaderDisplayedOnAllPages(), "Header is not present");
     }
 
     @AfterEach
